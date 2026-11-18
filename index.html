@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F3EC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Conti Fabiola">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<title>Conti di Fabiola</title>
+<style>
+:root{--bg:#F6F3EC;--ink:#1F2A24;--muted:#5C675F;--green:#2F5D46;--line:#E6E0D2;--coral:#B4492F;--card:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%}
+#app{max-width:480px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 110px);display:flex;flex-direction:column;gap:16px}
+h1{margin:0;font-size:24px;font-weight:700}
+h2{margin:0;font-size:15px;font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.nav{display:flex;gap:6px}
+.muted{color:var(--muted)}.small{font-size:13px}.strong{font-weight:700}
+.pos{color:var(--green)}.neg{color:var(--coral)}.right{text-align:right}
+.icon-btn{width:44px;height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);font-size:20px;color:var(--ink);cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card.dark{background:var(--green);border-color:var(--green);color:var(--bg)}
+.card.block{padding:18px;gap:12px}
+.big{font-size:22px;white-space:nowrap}.big2{font-size:20px}
+.split{display:flex;justify-content:space-between}
+.bar-row{display:flex;flex-direction:column;gap:6px}
+.bar-label{display:flex;justify-content:space-between;font-size:14px}
+.bar-track{height:8px;border-radius:4px;background:#EEF3EF;overflow:hidden}
+.bar-track.thick{height:10px;background:#F0E4DF;border-radius:5px}
+.bar-fill{height:100%;border-radius:4px}
+.chart{display:flex;align-items:flex-end;gap:12px;height:96px}
+.chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;height:100%}
+.chart-bar{width:100%;border-radius:8px;background:#CFE0D5}.chart-bar.current{background:var(--green)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:8px 0;border:0;border-top:1px solid var(--line);background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.row:first-of-type{border-top:0}
+.row-main{display:flex;flex-direction:column;gap:2px;min-width:0}
+.row-title{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fab{position:fixed;right:max(20px,calc(50% - 220px));bottom:calc(env(safe-area-inset-bottom) + 24px);width:60px;height:60px;border-radius:30px;border:0;background:var(--green);color:var(--bg);font-size:34px;line-height:1;box-shadow:0 8px 20px rgba(47,93,70,.35);cursor:pointer}
+.banner{background:#FBE3DC;color:#7A2B17;border:1px solid #E9B7A8;border-radius:14px;padding:12px 14px;font-size:14px}
+.sheet-backdrop{position:fixed;inset:0;background:rgba(20,28,24,.45)}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:92vh;overflow:auto;background:var(--bg);border-radius:26px 26px 0 0;padding:18px 20px calc(env(safe-area-inset-bottom) + 20px);display:flex;flex-direction:column;gap:14px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#E9E4D6;border-radius:16px;padding:4px}
+.tab{min-height:44px;border:0;border-radius:12px;background:none;font:inherit;font-weight:500;color:var(--muted);cursor:pointer}
+.tab.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted);border:0;padding:0;margin:0}
+.field legend{padding:0;margin-bottom:6px}
+input,select{font:inherit;font-size:17px;color:var(--ink);min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}.chip input{position:absolute;opacity:0;inset:0;min-height:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:15px}
+.chip input:checked + span{background:var(--green);border-color:var(--green);color:var(--bg);font-weight:500}
+.chip input:focus-visible + span,.btn:focus-visible,.icon-btn:focus-visible,.tab:focus-visible,.row:focus-visible{outline:3px solid #8DB5A0;outline-offset:2px}
+.sheet-actions{display:flex;gap:10px}
+.btn{min-height:50px;padding:0 20px;border-radius:25px;border:1px solid var(--green);font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.btn.primary{background:var(--green);color:var(--bg);flex:1}
+.btn.secondary{background:none;color:var(--green)}
+.btn.danger{background:none;border-color:var(--coral);color:var(--coral)}
+.error{margin:0;min-height:1em;color:var(--coral);font-size:14px}
+.cat-list{list-style:none;margin:0;padding:0}
+.cat-list li{display:flex;justify-content:space-between;align-items:center;min-height:48px;border-top:1px solid var(--line)}
+.cat-list li:first-child{border-top:0}
+.link{background:none;border:0;font:inherit;color:var(--green);padding:10px 8px;min-height:44px;cursor:pointer}
+.danger-text{color:var(--coral)}
+.inline{display:flex;gap:8px}.inline input{flex:1}.inline .btn{flex:0 0 auto}
+.file-btn{cursor:pointer}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<noscript>Serve JavaScript per usare l'app.</noscript>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
